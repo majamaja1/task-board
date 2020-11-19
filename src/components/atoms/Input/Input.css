@@ -1,0 +1,9 @@
+.Input {
+  display: inline-grid;
+}
+.Label {
+    margin-bottom: 5px;
+}
+.InputText{
+    width: 200px;
+}

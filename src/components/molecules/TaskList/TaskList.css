@@ -1,0 +1,31 @@
+.all-lists {
+  display: flex;
+  /* justify-content: space-around; */
+  border: solid lightcoral 5px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: #b22222;
+}
+.task-container {
+  flex: 1;
+  justify-content: center;
+}
+.task-container h2 {
+  margin: 0;
+  padding: 20px 0;
+  text-align: center;
+  border-bottom: solid 2px lightcoral;
+}
+
+.naslov h2{
+  display: flex;
+}
+
+.naslov h2{
+  flex: 1;
+  justify-content: center;
+}
+
+.delete{
+  flex: 2;
+  justify-content: flex-end;
+}

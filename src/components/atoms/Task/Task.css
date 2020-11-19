@@ -1,0 +1,45 @@
+.task{
+    font-weight: 500;
+   border: black dotted 0.5px ;
+   padding: 10px;
+   margin: 10px;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   color: rgb(170, 31, 6);
+}
+
+.slika{
+    width: 45px;
+    border-radius: 100%;
+    margin: 0px;
+    
+}
+.pic-wrap{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+.issue1{
+    background-color: cornflowerblue;
+    color:black;
+    width: 35px;
+    margin: 0%;
+    margin-left: 15px;
+    text-align: center;
+    
+   
+}
+
+.issue2{
+    color: cornflowerblue;
+    background-color: black; 
+    width: 35px;
+    margin: 0%;
+    margin-left: 15px;
+    text-align: center;
+}
+
+.type{
+    display: flex;
+}
+

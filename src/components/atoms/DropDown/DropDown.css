@@ -1,0 +1,14 @@
+.dropdown {
+  display: inline-grid;
+}
+
+.Option {
+  width: 200px;
+}
+
+.error {
+  margin: 0%;
+  color: rgb(218, 4, 4);
+  font-weight: 500;
+  
+}
