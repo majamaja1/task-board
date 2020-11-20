@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import UsersContext from "../../../context/userContext";
-import { removeListColumn } from "../../../redux/Columns/columnAction";
-import DeleteColumnButton from "../../atoms/DeleteColumnButton";
-import PropTypes from "prop-types";
-import "./TaskList.css";
-import Task from "../../atoms/Task";
+import React, { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import UsersContext from '../../../context/userContext';
+import { removeListColumn } from '../../../redux/Columns/columnAction';
+import DeleteColumnButton from '../../atoms/DeleteColumnButton';
+import './TaskList.css';
+import Task from '../../atoms/Task';
 
 const TaskList = ({ history }) => {
   const dispatch = useDispatch();
@@ -14,18 +14,17 @@ const TaskList = ({ history }) => {
   };
   const globalState = useContext(UsersContext);
 
-  const deleteItem = globalState.deleteItem;
-  const editState = globalState.editState;
+  const { deleteItem } = globalState;
+  const { editState } = globalState;
   const issues = useSelector((state) => state.issues.allIssues);
   const columns = useSelector((state) => state.listColumn.allListColumns);
 
-  console.log("TaskList -> columns", columns)
   return (
     <div>
       <div className="all-lists">
         {columns.map((list) => {
           return (
-            <div class="task-container">
+            <div className="task-container">
               <div className="naslov">
                 <h2>
                   {list.name}
@@ -40,7 +39,7 @@ const TaskList = ({ history }) => {
               </div>
               <div className="svi-taskovi-jedne-liste">
                 {issues
-                  .filter((issue) => list.value == issue.listColumn.value)
+                  .filter((issue) => list.value === issue.listColumn.value)
                   .map((filteredValue) => (
                     <Task
                       title={filteredValue.title}
@@ -69,5 +68,5 @@ const TaskList = ({ history }) => {
 export default TaskList;
 
 TaskList.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import CreateUserButton from "../../atoms/CreateUserButton";
-import Input from "../../atoms/Input";
-import Validator from "validatorjs";
-import { addUserToList, removeUser } from "../../../redux/Users/userAction";
-import DeleteColumnButton from "../../atoms/DeleteColumnButton";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Validator from 'validatorjs';
+import CreateUserButton from '../../atoms/CreateUserButton';
+import Input from '../../atoms/Input';
+import { addUserToList, removeUser } from '../../../redux/Users/userAction';
+import DeleteColumnButton from '../../atoms/DeleteColumnButton';
 
 const NewUserPage = () => {
   const [state, setState] = useState({
-    name: "",
+    name: '',
   });
 
   const [errors, setErrors] = useState({});
-  const users = useSelector((state) => state.users.allUsers);
+  const users = useSelector((userState) => userState.users.allUsers);
 
   const changeState = (newState) => {
     setState((prevState) => ({ ...prevState, ...newState }));
@@ -23,19 +23,18 @@ const NewUserPage = () => {
   };
 
   const isValid = () => {
-    let rules = {
-      name: "required",
+    const rules = {
+      name: 'required',
     };
 
-    let validation = new Validator(state, rules);
+    const validation = new Validator(state, rules);
 
     if (validation.fails()) {
       setErrors(validation.errors.errors);
       return false;
-    } else {
-      setErrors({});
-      return true;
     }
+    setErrors({});
+    return true;
   };
 
   const dispatch = useDispatch();
@@ -44,7 +43,7 @@ const NewUserPage = () => {
     if (isValid()) {
       dispatch(addUserToList(state));
 
-      setState({ name: "" });
+      setState({ name: '' });
     }
   };
 
@@ -56,7 +55,7 @@ const NewUserPage = () => {
     <div>
       <div className="Name">
         <Input
-          title={"Name: "}
+          title="Name: "
           value={state.name}
           onChange={onNameChange}
           error={errors.name}

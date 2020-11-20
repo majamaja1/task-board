@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import enums from "../../../constants/enum";
-import CreateButton from "../../atoms/CreateButton";
-import DropDown from "../../atoms/DropDown";
-import Input from "../../atoms/Input";
-import "./NewTaskPage.css";
-import Validator from "validatorjs";
-import { useDispatch, useSelector } from "react-redux";
-import { addIssueToList } from "../../../redux/actions";
-import PropTypes from "prop-types";
+import Validator from 'validatorjs';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import enums from '../../../constants/enum';
+import CreateButton from '../../atoms/CreateButton';
+import DropDown from '../../atoms/DropDown';
+import Input from '../../atoms/Input';
+import './NewTaskPage.css';
+import { addIssueToList } from '../../../redux/actions';
 
 const NewTaskPage = ({ history }) => {
   const [state, setState] = useState({
     redirect: false,
-    title: "",
-    details: "",
+    title: '',
+    details: '',
     issueType: undefined,
     priority: undefined,
     assignee: undefined,
@@ -56,25 +57,24 @@ const NewTaskPage = ({ history }) => {
   };
 
   const isValid = () => {
-    let rules = {
-      title: "required",
-      details: "required",
-      issueType: "required",
-      priority: "required",
-      assignee: "required",
-      listColumn: "required",
-      reporter: "required",
+    const rules = {
+      title: 'required',
+      details: 'required',
+      issueType: 'required',
+      priority: 'required',
+      assignee: 'required',
+      listColumn: 'required',
+      reporter: 'required',
     };
 
-    let validation = new Validator(state, rules);
+    const validation = new Validator(state, rules);
 
     if (validation.fails()) {
       setErrors(validation.errors.errors);
       return false;
-    } else {
-      setErrors({});
-      return true;
     }
+    setErrors({});
+    return true;
   };
 
   const dispatch = useDispatch();
@@ -86,14 +86,16 @@ const NewTaskPage = ({ history }) => {
     }
   };
 
-  const users = useSelector((state) => state.users.allUsers);
-  const columns = useSelector((state) => state.listColumn.allListColumns);
+  const users = useSelector((userState) => userState.users.allUsers);
+  const columns = useSelector(
+    (columnState) => columnState.listColumn.allListColumns
+  );
 
   return (
     <div className="NewTask">
       <div className="Title">
         <Input
-          title={"Title: "}
+          title="Title: "
           value={state.title}
           onChange={onTitleChange}
           error={errors.title}
@@ -101,7 +103,7 @@ const NewTaskPage = ({ history }) => {
       </div>
       <div>
         <Input
-          title={"Details: "}
+          title="Details: "
           value={state.details}
           onChange={onDetailsChange}
           error={errors.details}
@@ -109,7 +111,7 @@ const NewTaskPage = ({ history }) => {
       </div>
       <div className="DropDown">
         <DropDown
-          title={"Issue type: "}
+          title="Issue type: "
           onSelect={issueTypeClick}
           items={enums.issueType}
           value={state.issueType}
@@ -118,7 +120,7 @@ const NewTaskPage = ({ history }) => {
       </div>
       <div className="DropDown">
         <DropDown
-          title={"Priority: "}
+          title="Priority: "
           onSelect={priorityClick}
           items={enums.priority}
           value={state.priority}
@@ -127,7 +129,7 @@ const NewTaskPage = ({ history }) => {
       </div>
       <div className="DropDown">
         <DropDown
-          title={"Assignee: "}
+          title="Assignee: "
           onSelect={assigneeClick}
           items={users}
           value={state.assignee}
@@ -136,7 +138,7 @@ const NewTaskPage = ({ history }) => {
       </div>
       <div className="DropDown">
         <DropDown
-          title={"List column: "}
+          title="List column: "
           onSelect={listColumnClick}
           items={columns}
           value={state.listColumn}
@@ -145,7 +147,7 @@ const NewTaskPage = ({ history }) => {
       </div>
       <div className="DropDown">
         <DropDown
-          title={"Reporter: "}
+          title="Reporter: "
           onSelect={reporterClick}
           items={users}
           value={state.reporter}
@@ -162,5 +164,5 @@ const NewTaskPage = ({ history }) => {
 export default NewTaskPage;
 
 NewTaskPage.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };

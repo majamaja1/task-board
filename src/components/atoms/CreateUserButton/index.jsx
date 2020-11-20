@@ -1,10 +1,10 @@
-import React from "react";
-import "./CreateUserButton.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './CreateUserButton.css';
+import PropTypes from 'prop-types';
 
 const CreateUserButton = ({ onClick }) => {
   return (
-    <button className="create-user-button" onClick={onClick}>
+    <button type="submit" className="create-user-button" onClick={onClick}>
       Create user
     </button>
   );

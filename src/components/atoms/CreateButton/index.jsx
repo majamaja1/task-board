@@ -1,10 +1,10 @@
-import React from "react";
-import "./CreateButton.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './CreateButton.css';
+import PropTypes from 'prop-types';
 
 const CreateButton = ({ onClick }) => {
   return (
-    <button className="button" onClick={onClick}>
+    <button className="button" type="submit" onClick={onClick}>
       Create task
     </button>
   );

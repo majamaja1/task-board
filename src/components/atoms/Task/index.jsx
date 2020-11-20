@@ -1,10 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { deleteIssue } from "../../../redux/actions";
-import DeleteButton from "../../atoms/DeleteButton";
-import EditButton from "../../atoms/EditButton";
-import "./Task.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { deleteIssue } from '../../../redux/actions';
+import DeleteButton from '../DeleteButton';
+import EditButton from '../EditButton';
+import './Task.css';
 
 const Task = ({
   title,
@@ -27,22 +28,41 @@ const Task = ({
   };
   return (
     <div className="task">
-      <p>title: {title}</p>
-      <p>details: {details}</p>
-      <p className="pic-wrap">
-        <p>assignee: {assignee}</p>
-        <img className="slika" src={image} />
+      <p>
+        title:
+        {title}
       </p>
-      <p>reporter: {reporter}</p>
+      <p>
+        details:
+        {details}
+      </p>
+      <div className="pic-wrap">
+        <p>
+          assignee:
+          {assignee}
+        </p>
+        <img className="slika" src={image} alt="slika" />
+      </div>
+      <p>
+        reporter:
+        {reporter}
+      </p>
       <p className="type">
-        type:{" "}
-        {issueType === "task" ? (
+        type:
+        {issueType === 'task' ? (
           <p className="issue1">{issueType}</p>
         ) : (
           <p className="issue2">{issueType}</p>
-        )}{" "}
+        )}
       </p>
-      <p>priority: {priority}</p>
+      <p>
+        priority:
+        {priority}
+      </p>
+      <p>
+        priority:
+        {priority}
+      </p>
       <EditButton onClick={editTask} />
       <DeleteButton onClick={deleteTask} />
     </div>
@@ -60,5 +80,5 @@ Task.propTypes = {
   reporter: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };

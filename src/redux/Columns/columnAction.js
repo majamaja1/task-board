@@ -1,4 +1,4 @@
-import ACTIONS from "../../constants/ACTIONS";
+import ACTIONS from '../../constants/ACTIONS';
 
 const addListColumn = (columnState) => {
   return {

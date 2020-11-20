@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import Input from "../../atoms/Input";
-import Validator from "validatorjs";
-import CreateColumnButton from "../../atoms/CreateColumnButton";
-import { addListColumn } from "../../../redux/Columns/columnAction";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Validator from 'validatorjs';
+import PropTypes from 'prop-types';
+
+import Input from '../../atoms/Input';
+import CreateColumnButton from '../../atoms/CreateColumnButton';
+import { addListColumn } from '../../../redux/Columns/columnAction';
 
 const NewColumnPage = ({ history }) => {
   const [state, setState] = useState({
-    title: "",
+    title: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -21,19 +22,18 @@ const NewColumnPage = ({ history }) => {
   };
 
   const isValid = () => {
-    let rules = {
-      title: "required",
+    const rules = {
+      title: 'required',
     };
 
-    let validation = new Validator(state, rules);
+    const validation = new Validator(state, rules);
 
     if (validation.fails()) {
       setErrors(validation.errors.errors);
       return false;
-    } else {
-      setErrors({});
-      return true;
     }
+    setErrors({});
+    return true;
   };
 
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const NewColumnPage = ({ history }) => {
     <div>
       <div className="Title">
         <Input
-          title={"Title: "}
+          title="Title: "
           value={state.title}
           onChange={onTitleChange}
           error={errors.title}
@@ -66,5 +66,5 @@ const NewColumnPage = ({ history }) => {
 export default NewColumnPage;
 
 NewColumnPage.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };

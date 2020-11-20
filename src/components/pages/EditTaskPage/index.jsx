@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import enums from "../../../constants/enum";
-import DropDown from "../../atoms/DropDown";
-import EditButton from "../../atoms/EditButton";
-import Input from "../../atoms/Input";
-import Validator from "validatorjs";
-import { useDispatch, useSelector } from "react-redux";
-import { editIssue } from "../../../redux/actions";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import Validator from 'validatorjs';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const EditTaskPage = (props) => {
-  const id = props.match.params.id;
-  const { history } = props;
+import enums from '../../../constants/enum';
+import DropDown from '../../atoms/DropDown';
+import EditButton from '../../atoms/EditButton';
+import Input from '../../atoms/Input';
+import { editIssue } from '../../../redux/actions';
+
+const EditTaskPage = ({ history, match }) => {
+  const { id } = match.params;
 
   const issue = useSelector((state) => state.issues.allIssues[id]);
   const users = useSelector((state) => state.users.allUsers);
@@ -53,25 +53,24 @@ const EditTaskPage = (props) => {
   };
 
   const isValid = () => {
-    let rules = {
-      title: "required",
-      details: "required",
-      issueType: "required",
-      priority: "required",
-      assignee: "required",
-      listColumn: "required",
-      reporter: "required",
+    const rules = {
+      title: 'required',
+      details: 'required',
+      issueType: 'required',
+      priority: 'required',
+      assignee: 'required',
+      listColumn: 'required',
+      reporter: 'required',
     };
 
-    let validation = new Validator(editState, rules);
+    const validation = new Validator(editState, rules);
 
     if (validation.fails()) {
       setErrors(validation.errors.errors);
       return false;
-    } else {
-      setErrors({});
-      return true;
     }
+    setErrors({});
+    return true;
   };
 
   const dispatch = useDispatch();
@@ -88,7 +87,7 @@ const EditTaskPage = (props) => {
       <div className="NewTask">
         <div className="Title">
           <Input
-            title={"Title: "}
+            title="Title: "
             value={editState.title}
             onChange={onTitleChange}
             error={errors.title}
@@ -96,7 +95,7 @@ const EditTaskPage = (props) => {
         </div>
         <div>
           <Input
-            title={"Details: "}
+            title="Details: "
             value={editState.details}
             onChange={onDetailsChange}
             error={errors.details}
@@ -104,7 +103,7 @@ const EditTaskPage = (props) => {
         </div>
         <div className="DropDown">
           <DropDown
-            title={"Issue type: "}
+            title="Issue type: "
             onSelect={issueTypeClick}
             items={enums.issueType}
             value={editState.issueType}
@@ -113,7 +112,7 @@ const EditTaskPage = (props) => {
         </div>
         <div className="DropDown">
           <DropDown
-            title={"Priority: "}
+            title="Priority: "
             onSelect={priorityClick}
             items={enums.priority}
             value={editState.priority}
@@ -122,7 +121,7 @@ const EditTaskPage = (props) => {
         </div>
         <div className="DropDown">
           <DropDown
-            title={"Assignee: "}
+            title="Assignee: "
             onSelect={assigneeClick}
             items={users}
             value={editState.assignee}
@@ -131,7 +130,7 @@ const EditTaskPage = (props) => {
         </div>
         <div className="DropDown">
           <DropDown
-            title={"List column: "}
+            title="List column: "
             onSelect={listColumnClick}
             items={columns}
             value={editState.listColumn}
@@ -140,7 +139,7 @@ const EditTaskPage = (props) => {
         </div>
         <div className="DropDown">
           <DropDown
-            title={"Reporter: "}
+            title="Reporter: "
             onSelect={reporterClick}
             items={users}
             value={editState.reporter}
@@ -157,5 +156,6 @@ const EditTaskPage = (props) => {
 export default EditTaskPage;
 
 EditTaskPage.propTypes = {
-  props: PropTypes.object.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
 };

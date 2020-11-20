@@ -1,10 +1,15 @@
-import ACTIONS from "../../constants/ACTIONS.js";
+import ACTIONS from '../../constants/ACTIONS';
 
 const initialState = {
   allIssues: [],
 };
 
 export default function issueReducer(state = initialState, action) {
+  let id;
+  const newAllIssues = [...state.allIssues];
+  const index = action.deletedIssueId;
+  const newArr = [...state.allIssues];
+  newArr.splice(index, 1);
   switch (action.type) {
     case ACTIONS.ADD_ISSUE_TO_LIST:
       return {
@@ -16,8 +21,7 @@ export default function issueReducer(state = initialState, action) {
       };
 
     case ACTIONS.EDIT_ISSUE:
-      const id = action.editIssue.id;
-      const newAllIssues = [...state.allIssues];
+      id = action.editIssue.id;
       newAllIssues[id] = { ...newAllIssues[id], ...action.editIssue };
 
       return {
@@ -26,23 +30,17 @@ export default function issueReducer(state = initialState, action) {
       };
 
     case ACTIONS.DELETE_ISSUE:
-      const index = action.deletedIssueId;
-      const newArr = [...state.allIssues];
-      newArr.splice(index, 1);
-
-      const newArray = newArr.map((elem, i) => {
-        if (i >= index) {
-          return {
-            ...elem,
-            id: elem.id - 1,
-          };
-        }
-        return elem;
-      });
-
       return {
         ...state,
-        allIssues: newArray,
+        allIssues: newArr.map((elem, i) => {
+          if (i >= index) {
+            return {
+              ...elem,
+              id: elem.id - 1,
+            };
+          }
+          return elem;
+        }),
       };
 
     default:

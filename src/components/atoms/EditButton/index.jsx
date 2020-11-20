@@ -1,10 +1,10 @@
-import React from "react";
-import "./EditButton.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './EditButton.css';
+import PropTypes from 'prop-types';
 
 const EditButton = ({ onClick }) => {
   return (
-    <button className="edit-button" onClick={onClick}>
+    <button type="submit" className="edit-button" onClick={onClick}>
       Edit
     </button>
   );

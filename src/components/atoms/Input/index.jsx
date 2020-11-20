@@ -1,18 +1,21 @@
-import React from "react";
-import "./Input.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './Input.css';
+import PropTypes from 'prop-types';
 
 const Input = ({ title, value, onChange, error }) => {
   return (
     <div className="input-wrapper">
-      <label className="Label">{title}</label>
+      <label className="Label" htmlFor="title">
+        {title}
+      </label>
       <input
         className="InputText"
+        htmlFor="title"
         type="text"
         value={value}
         onChange={onChange}
         id="text"
-        placeholder={""}
+        placeholder=""
       />
       <p className="error">{error}</p>
     </div>
